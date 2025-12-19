@@ -48,9 +48,24 @@ async function getData() {
 function printData(data) {
   console.log(data);
   console.log(data[0]);
+  data.forEach((villager) => {
+    if (villager.name === "Admiral") {
+      console.log(villager);
+    }
+  });
+  data.forEach((villager) => inject(villager));
 }
 
 getData();
+
+function inject(villager) {
+  let dynamicColor = villager.title_color;
+  document.querySelector(".card-container").insertAdjacentHTML(
+    "beforeend",
+    `<div class="card">
+        <h1 class="text-[#${dynamicColor}]">${villager.name} is a ${villager.species}</h1>`
+  );
+}
 
 let villagers = [];
 function villagerDetails() {}

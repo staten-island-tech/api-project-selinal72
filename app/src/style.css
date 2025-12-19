@@ -1,1 +1,18 @@
 @import "tailwindcss";
+
+.card {
+  min-width: 250px;
+  width: 22%;
+  height: 10rem;
+  margin: 3rem 0;
+  border: 2px solid white;
+  border-radius: 10px;
+  box-shadow: white 0px 1px 40px;
+  background-color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  transition: all 0.5s;
+}
