@@ -1,5 +1,5 @@
 import "./style.css";
-const apiUrl = "https://api.nookipedia.com/villagers";
+const apiUrl = "https://api.nookipedia.com/villagers?game=nh";
 const apiKey = "94692e6f-677f-4348-85fe-6375ae013248";
 
 /* function getData() {
@@ -37,7 +37,9 @@ async function getData() {
         "Accept-Version": "1.7.0",
       },
     });
-    if (!response.ok) throw new Error(`Error! Status: ${response.status}`);
+    if (!response.ok) {
+      throw new Error(`Error! Status: ${response.status}`);
+    }
     const data = await response.json();
     printData(data);
   } catch (error) {
@@ -47,23 +49,28 @@ async function getData() {
 
 function printData(data) {
   console.log(data);
-  console.log(data[0]);
+  /* console.log(data[0]);
   data.forEach((villager) => {
     if (villager.name === "Admiral") {
       console.log(villager);
     }
-  });
+  }); */
   data.forEach((villager) => inject(villager));
 }
 
 getData();
 
 function inject(villager) {
-  let dynamicColor = villager.title_color;
+  let dynamicTitle = villager.title_color;
+  let dynamicText = villager.text_color;
   document.querySelector(".card-container").insertAdjacentHTML(
     "beforeend",
     `<div class="card">
-        <h1 class="text-[#${dynamicColor}]">${villager.name} is a ${villager.species}</h1>`
+      <img src="${villager.image_url}" alt="${villager.name}">
+      <h1 class="text-[#${dynamicTitle}]">${villager.name}</h1>
+      <h2 class="text-[#${dynamicText}]">${villager.species}</h2>
+      <p class="text-[#${dynamicText}]">${villager.quote}</p>
+    </div>`
   );
 }
 
